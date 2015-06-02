@@ -13,9 +13,10 @@
 #import "HWDiscoverViewController.h"
 #import "HWMessageCenterViewController.h"
 #import "HWProfileViewController.h"
+#import "HWTabBar.h"
 
 
-@interface HWTabBarViewController ()
+@interface HWTabBarViewController () <HWTabBarDelegate>
 
 @end
 
@@ -24,21 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 1.初始化子控制器
     //首页
     HWHomeViewController *home =[[HWHomeViewController alloc] init];
     [self addChildVC:home title:@"首页" image:@"tabbar_home"
                    selectedImage:@"tabbar_home_selected"];
-    
     //消息
-    HWDiscoverViewController *discover =[[HWDiscoverViewController alloc] init];
-    [self addChildVC:discover title:@"消息" image:@"tabbar_message_center" selectedImage:@"tabbar_message_center_selected"];
-    //发现
     HWMessageCenterViewController *messagecenter =[[HWMessageCenterViewController alloc] init];
-    [self addChildVC:messagecenter title:@"发现" image:@"tabbar_discover" selectedImage:@"tabbar_discover_selected"];
-
+    [self addChildVC:messagecenter title:@"消息" image:@"tabbar_message_center" selectedImage:@"tabbar_message_center_selected"];
+    //发现
+    HWDiscoverViewController *discover =[[HWDiscoverViewController alloc] init];
+    [self addChildVC:discover title:@"发现" image:@"tabbar_discover" selectedImage:@"tabbar_discover_selected"];
     //我
     HWProfileViewController *profile =[[HWProfileViewController alloc] init];
     [self addChildVC:profile title:@"我" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
+    
+    // 2.更换系统自带的tabbar
+    HWTabBar *tabBar = [[HWTabBar alloc] init];
+    [self setValue:tabBar forKeyPath:@"tabBar"];
     // Do any additional setup after loading the view.
 }
 
@@ -54,13 +58,13 @@
     childVC.title =title; //同时设置tabbar和navigationBar的标题
     
     //设置子控制器的图片
-    [childVC.tabBarItem setImage:[UIImage imageNamed:image]];
-    [childVC.tabBarItem setSelectedImage:[UIImage imageNamed:selectedImage]];
+    childVC.tabBarItem.image = [UIImage imageNamed:image];
+    childVC.tabBarItem.selectedImage =[[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     //设置文字的样式
-    NSMutableDictionary *textAttrs = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = HWColor(123, 123, 123);
-    NSMutableDictionary  *selecttextAttrs = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary  *selecttextAttrs = [NSMutableDictionary dictionary];
     selecttextAttrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
     [childVC.tabBarItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     [childVC.tabBarItem setTitleTextAttributes:selecttextAttrs forState:UIControlStateSelected];

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "HWTabBarViewController.h"
+#import "HWOAuthViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +24,7 @@
     self.window.frame = [[UIScreen mainScreen] bounds];
     
     //设置根控制器
+    //self.window.rootViewController = [[HWOAuthViewController alloc] init];
     self.window.rootViewController = [[HWTabBarViewController alloc] init];
     
     

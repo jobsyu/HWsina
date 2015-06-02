@@ -54,6 +54,28 @@
    
 }
 
+#pragma mark -HWDropdownMenuDelegate
+/**
+  * 下拉菜单被销毁了
+  */
+
+-(void)dropdownMenuDidDismiss:(HWDropdownMenu *)menu
+{
+    UIButton *titleButton = (UIButton *)self.navigationItem.titleView;
+    //让尖头向下
+    titleButton.selected = NO;
+}
+
+/**
+  * 下拉菜单显示了
+  */
+-(void)dropdownMenuDidShow:(HWDropdownMenu *)menu
+{
+    UIButton *titleButton = (UIButton *)self.navigationItem.titleView;
+    //让尖头向上
+    titleButton.selected = YES;
+}
+
 /**
   * 标题点击
   */
@@ -73,4 +95,5 @@
     [menu showFrom:titleButton];
     
 }
+
 @end

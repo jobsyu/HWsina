@@ -14,9 +14,21 @@
 
 @implementation HWMessageCenterViewController
 
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        //Custom initialization
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // style : 这个参数是用来设置背景的, 在iOS之前效果比较明显，iOS7中没有任何效果
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"写私信" style:UIBarButtonItemStylePlain target:self action:@selector(composeMsg)];
+    // 这个item不能点击(目前放在viewWillAppear就能显示disable下的主题)
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
