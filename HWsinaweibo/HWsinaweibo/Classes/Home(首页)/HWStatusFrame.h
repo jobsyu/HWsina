@@ -62,5 +62,5 @@
 @property (nonatomic,assign) CGRect toolbarF;
 
 /** cell的高度 */
-@property (nonatomic,assign) CGRect cellHeight;
+@property (nonatomic,assign) CGFloat cellHeight;
 @end

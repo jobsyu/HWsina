@@ -14,6 +14,7 @@
 
 #import "UIView+Extension.h"
 #import "UIBarButtonItem+Extension.h"
+#import "NSString+Extension.h"
 #import "NSDate+Extension.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>

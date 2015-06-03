@@ -75,6 +75,11 @@
 		BCBF41971B1DAFEC005E692A /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBF41961B1DAFEC005E692A /* NSDate+Extension.m */; };
 		BCBF419A1B1DD31B005E692A /* HWStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBF41991B1DD31B005E692A /* HWStatusCell.m */; };
 		BCBF419D1B1DD577005E692A /* HWIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBF419C1B1DD577005E692A /* HWIconView.m */; };
+		BCE2E0D31B1E89290042C440 /* HWStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2E0D21B1E89290042C440 /* HWStatusToolbar.m */; };
+		BCE2E0D61B1E9D630042C440 /* HWStatusPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2E0D51B1E9D630042C440 /* HWStatusPhotosView.m */; };
+		BCE2E0D91B1EA19E0042C440 /* HWStatusPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2E0D81B1EA19E0042C440 /* HWStatusPhotoView.m */; };
+		BCE2E0DC1B1EDE400042C440 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2E0DB1B1EDE400042C440 /* NSString+Extension.m */; };
+		BCE2E0E11B1EFAB90042C440 /* HWNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2E0E01B1EFAB90042C440 /* HWNewfeatureViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +233,16 @@
 		BCBF41991B1DD31B005E692A /* HWStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusCell.m; sourceTree = "<group>"; };
 		BCBF419B1B1DD577005E692A /* HWIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWIconView.h; sourceTree = "<group>"; };
 		BCBF419C1B1DD577005E692A /* HWIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWIconView.m; sourceTree = "<group>"; };
+		BCE2E0D11B1E89290042C440 /* HWStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusToolbar.h; sourceTree = "<group>"; };
+		BCE2E0D21B1E89290042C440 /* HWStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusToolbar.m; sourceTree = "<group>"; };
+		BCE2E0D41B1E9D630042C440 /* HWStatusPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusPhotosView.h; sourceTree = "<group>"; };
+		BCE2E0D51B1E9D630042C440 /* HWStatusPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusPhotosView.m; sourceTree = "<group>"; };
+		BCE2E0D71B1EA19E0042C440 /* HWStatusPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusPhotoView.h; sourceTree = "<group>"; };
+		BCE2E0D81B1EA19E0042C440 /* HWStatusPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusPhotoView.m; sourceTree = "<group>"; };
+		BCE2E0DA1B1EDE400042C440 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		BCE2E0DB1B1EDE400042C440 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		BCE2E0DF1B1EFAB90042C440 /* HWNewfeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewfeatureViewController.h; sourceTree = "<group>"; };
+		BCE2E0E01B1EFAB90042C440 /* HWNewfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNewfeatureViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +320,7 @@
 		BC0D112E1B1C0CCD0015A057 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BCE2E0DD1B1EFA1F0042C440 /* Newfeature(新特性) */,
 				BCBF41011B1D50D4005E692A /* OAuth(授权) */,
 				BCBF40FD1B1D4FC6005E692A /* Temp(临时) */,
 				BC0D11381B1C0F750015A057 /* Main(主要) */,
@@ -441,6 +457,8 @@
 				BC0D118D1B1C4EF60015A057 /* UIView+Extension.m */,
 				BCBF41951B1DAFEC005E692A /* NSDate+Extension.h */,
 				BCBF41961B1DAFEC005E692A /* NSDate+Extension.m */,
+				BCE2E0DA1B1EDE400042C440 /* NSString+Extension.h */,
+				BCE2E0DB1B1EDE400042C440 /* NSString+Extension.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -469,6 +487,12 @@
 				BC0D119B1B1C81F70015A057 /* HWTitleMenuViewController.m */,
 				BCBF41981B1DD31B005E692A /* HWStatusCell.h */,
 				BCBF41991B1DD31B005E692A /* HWStatusCell.m */,
+				BCE2E0D11B1E89290042C440 /* HWStatusToolbar.h */,
+				BCE2E0D21B1E89290042C440 /* HWStatusToolbar.m */,
+				BCE2E0D41B1E9D630042C440 /* HWStatusPhotosView.h */,
+				BCE2E0D51B1E9D630042C440 /* HWStatusPhotosView.m */,
+				BCE2E0D71B1EA19E0042C440 /* HWStatusPhotoView.h */,
+				BCE2E0D81B1EA19E0042C440 /* HWStatusPhotoView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -643,6 +667,23 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		BCE2E0DD1B1EFA1F0042C440 /* Newfeature(新特性) */ = {
+			isa = PBXGroup;
+			children = (
+				BCE2E0DE1B1EFA4A0042C440 /* Controller */,
+			);
+			name = "Newfeature(新特性)";
+			sourceTree = "<group>";
+		};
+		BCE2E0DE1B1EFA4A0042C440 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BCE2E0DF1B1EFAB90042C440 /* HWNewfeatureViewController.h */,
+				BCE2E0E01B1EFAB90042C440 /* HWNewfeatureViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -744,6 +785,7 @@
 			files = (
 				BCBF41251B1D8EEC005E692A /* HWAccountTool.m in Sources */,
 				BCBF41521B1D953F005E692A /* MJTypeEncoding.m in Sources */,
+				BCE2E0D31B1E89290042C440 /* HWStatusToolbar.m in Sources */,
 				BCBF414B1B1D953F005E692A /* MJArgument.m in Sources */,
 				BCBF41941B1DA987005E692A /* HWPhoto.m in Sources */,
 				BCBF418B1B1DA084005E692A /* HWStatusFrame.m in Sources */,
@@ -754,6 +796,7 @@
 				BCBF414F1B1D953F005E692A /* MJMember.m in Sources */,
 				BCBF411D1B1D5A1B005E692A /* AFSecurityPolicy.m in Sources */,
 				BCBF41811B1D954C005E692A /* UIButton+WebCache.m in Sources */,
+				BCE2E0DC1B1EDE400042C440 /* NSString+Extension.m in Sources */,
 				BCBF419A1B1DD31B005E692A /* HWStatusCell.m in Sources */,
 				BCBF411A1B1D5A1B005E692A /* AFHTTPRequestOperationManager.m in Sources */,
 				BCBF41791B1D954C005E692A /* NSData+ImageContentType.m in Sources */,
@@ -771,7 +814,9 @@
 				BCBF417A1B1D954C005E692A /* SDImageCache.m in Sources */,
 				BCBF41511B1D953F005E692A /* MJType.m in Sources */,
 				BCBF41801B1D954C005E692A /* SDWebImagePrefetcher.m in Sources */,
+				BCE2E0D91B1EA19E0042C440 /* HWStatusPhotoView.m in Sources */,
 				BCBF41851B1D954C005E692A /* UIImageView+HighlightedWebCache.m in Sources */,
+				BCE2E0D61B1E9D630042C440 /* HWStatusPhotosView.m in Sources */,
 				BC0D117F1B1C429E0015A057 /* HWDiscoverViewController.m in Sources */,
 				BC0D119C1B1C81F70015A057 /* HWTitleMenuViewController.m in Sources */,
 				BCBF41911B1DA4E0005E692A /* HWStatus.m in Sources */,
@@ -799,6 +844,7 @@
 				BCBF41551B1D953F005E692A /* NSObject+MJMember.m in Sources */,
 				BCBF417D1B1D954C005E692A /* SDWebImageDownloader.m in Sources */,
 				BC0D11831B1C42F00015A057 /* HWMessageCenterViewController.m in Sources */,
+				BCE2E0E11B1EFAB90042C440 /* HWNewfeatureViewController.m in Sources */,
 				BCBF41041B1D5130005E692A /* HWOAuthViewController.m in Sources */,
 				BCBF419D1B1DD577005E692A /* HWIconView.m in Sources */,
 				BCBF414E1B1D953F005E692A /* MJIvar.m in Sources */,

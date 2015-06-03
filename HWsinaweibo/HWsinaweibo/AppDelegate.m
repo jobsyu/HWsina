@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "HWTabBarViewController.h"
 #import "HWOAuthViewController.h"
+#import "HWNewfeatureViewController.h"
 
 @interface AppDelegate ()
 
@@ -25,7 +26,7 @@
     
     //设置根控制器
     //self.window.rootViewController = [[HWOAuthViewController alloc] init];
-    self.window.rootViewController = [[HWTabBarViewController alloc] init];
+    self.window.rootViewController = [[HWNewfeatureViewController alloc] init];
     
     
     [self.window makeKeyAndVisible];
