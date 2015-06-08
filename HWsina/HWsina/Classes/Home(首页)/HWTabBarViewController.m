@@ -13,6 +13,7 @@
 #import "HWMessageCenterViewController.h"
 #import "HWProfileViewController.h"
 #import "HWTabBar.h"
+#import "HWComposeViewController.h"
 
 
 @interface HWTabBarViewController () <HWTabBarDelegate>
@@ -43,6 +44,21 @@
     HWTabBar *tabBar = [[HWTabBar alloc] init];
     [self setValue:tabBar forKeyPath:@"tabBar"];
     // Do any additional setup after loading the view.
+    /*
+     [self setValue:tabBar forKeyPath:@"tabBar"];相当于self.tabBar = tabBar;
+     [self setValue:tabBar forKeyPath:@"tabBar"];这行代码过后，tabBar的delegate就是HWTabBarViewController
+     说明，不用再设置tabBar.delegate = self;
+     */
+    
+    /*
+     1.如果tabBar设置完delegate后，再执行下面代码修改delegate，就会报错
+     tabBar.delegate = self;
+     
+     2.如果再次修改tabBar的delegate属性，就会报下面的错误
+     错误信息：Changing the delegate of a tab bar managed by a tab bar controller is not allowed.
+     错误意思：不允许修改TabBar的delegate属性(这个TabBar是被TabBarViewController所管理的)
+     */
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,14 +91,15 @@
     [self addChildViewController:nav];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark  －HWTabBarDelegate代理方法
+-(void)tabBarDidClickPlusButton:(HWTabBar *)tabBar
+{
+    HWComposeViewController *compose =[[HWComposeViewController alloc] init];
+    
+    HWNavigationViewController *nav = [[HWNavigationViewController alloc] initWithRootViewController:compose];
+    [self presentViewController:nav animated:YES completion:nil];
 }
-*/
+
+
 
 @end

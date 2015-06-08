@@ -10,6 +10,7 @@
 #import "HWEmotionPopView.h"
 #import "HWEmotionButton.h"
 #import "HWEmotionTool.h"
+#import "HWComposeToolbar.h"
 
 @interface HWEmotionPageView()
 /** 点击表情后弹出的放大镜 */
