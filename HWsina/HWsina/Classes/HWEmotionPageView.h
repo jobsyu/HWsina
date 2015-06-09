@@ -4,7 +4,7 @@
 //
 //  Created by qianfeng on 15/6/4.
 //  Copyright (c) 2015年 qianfeng. All rights reserved.
-//
+//  用来表示一页的表情(里面显示1～20个表情)
 
 #import <UIKit/UIKit.h>
 

@@ -11,6 +11,9 @@
 #import "HWEmotionTextView.h"
 #import "HWComposeToolbar.h"
 #import "HWComposePhotosView.h"
+#import "HWEmotionKeyboard.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD+MJ.h"
 
 @interface HWComposeViewController() <UITextViewDelegate,HWComposeToolbarDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -20,13 +23,25 @@
 @property (nonatomic,weak) HWComposeToolbar *toolbar;
 /** 相册（存放拍照或者相册中选择的图片） */
 @property (nonatomic,weak) HWComposePhotosView *photosView;
+#warning  一定要用strong
+/** 表情键盘 */
+@property (nonatomic,strong) HWEmotionKeyboard *emotionKeyboard;
 /** 是否正在切换键盘 */
 @property (nonatomic,assign) BOOL switchingKeyboard;
 @end
 
 @implementation HWComposeViewController
-
-
+#pragma mark － 懒加载
+-(HWEmotionKeyboard *)emotionKeyboard
+{
+    if (!_emotionKeyboard) {
+        self.emotionKeyboard = [[HWEmotionKeyboard alloc] init];
+        //键盘的宽度
+        self.emotionKeyboard.width = self.view.width;
+        self.emotionKeyboard.height = 216;
+    }
+    return _emotionKeyboard;
+}
 
 #pragma mark - 系统方法
 -(void)viewDidLoad
@@ -164,7 +179,70 @@
 
 -(void)send
 {
-  
+    if (self.photosView.photos.count > 0) {
+        [self sendWithImage];
+    } else {
+        [self sendWithoutImage];
+    }
+    
+    //dismiss
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**
+  * 发布带有图片的微博
+  */
+-(void)sendWithImage
+{
+    // URL: https://upload.api.weibo.com/2/statuses/upload.json
+    // 参数:
+    /**	status true string 要发布的微博文本内容，必须做URLencode，内容不超过140个汉字。*/
+    /**	access_token true string*/
+    /**	pic true binary 微博的配图。*/
+    //1. 请求管理者
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    //2.拼接请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = [HWAccountTool account].access_token;
+    params[@"status"] = self.textView.fullText;
+    
+    //3.发送请求
+    [mgr POST:@"https://upload.api.weibo.com/2/statuses/upload.json" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //拼接文件数据
+        UIImage *image = [self.photosView.photos firstObject];
+        NSData *data = UIImageJPEGRepresentation(image, 1.0);
+        [formData appendPartWithFileData:data name:@"pic" fileName:@"test.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        [MBProgressHUD showSuccess:@"发送成功"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD showError:@"发送失败"];
+    }];
+}
+
+/**
+  * 发布没有图片的微博
+  */
+-(void)sendWithoutImage
+{
+    // URL: https://api.weibo.com/2/statuses/update.json
+    // 参数:
+    /**	status true string 要发布的微博文本内容，必须做URLencode，内容不超过140个汉字。*/
+    /**	access_token true string*/
+    // 1.请求管理者
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.拼接请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = [HWAccountTool account].access_token;
+    params[@"status"] = self.textView.fullText;
+    
+    //3.发送请求
+    [mgr POST:@"https://api.weibo.com/2/statuses/update.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        [MBProgressHUD showSuccess:@"发送成功"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD showError:@"发送失败"];
+    }];
 }
 
 #pragma mark - 监听方法
@@ -173,7 +251,7 @@
   */
 -(void)textDidChange
 {
-   
+    self.navigationItem.rightBarButtonItem.enabled =self.textView.hasText;
 }
 
 /**
@@ -203,19 +281,29 @@
 }
 
 /**
- * 键盘尺寸和位置的改变
+ * 表情选中了
  */
 -(void)emotionDidSelect:(NSNotification *)notification
 {
+    NSDictionary *userInfo = notification.userInfo;
     
+    HWEmotion *emtion = userInfo[HWSelectEmotionKey];
+    
+    [self.textView insertEmotion:emtion];
 }
 
 /**
- * 删除文字
+ *  删除文字
  */
 -(void)emotionDidDeleted
 {
-    
+    [self.textView deleteBackward];
+}
+
+#pragma mark -UITextViewDelegate
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark -HWComposeToolbarDelegate
@@ -246,9 +334,37 @@
 
 
 #pragma mark -其他方法
+/**
+  * 切换键盘
+  */
 -(void)switchKeyboard
 {
-   
+    //self.textView.inputView = nil 使用的是系统自带键盘
+    if(self.textView.inputView == nil){ //切换为自定义的表情键盘
+        self.textView.inputView = self.emotionKeyboard;
+        
+        //显示键盘按钮
+        self.toolbar.showKeyboardButton = YES;
+    } else {//切换为系统自带的键盘
+        self.textView.inputView = nil;
+        //显示表情按钮
+        self.toolbar.showKeyboardButton = NO;
+    }
+    
+    //开始切换键盘
+    self.switchingKeyboard = YES;
+    
+    //退出键盘
+    [self.textView endEditing:YES];
+    
+    //结束切换键盘
+    self.switchingKeyboard = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(0.1 * NSEC_PER_SEC)),
+        dispatch_get_main_queue(), ^{
+        //弹出键盘
+        [self.textView becomeFirstResponder];
+    });
 }
 
 -(void)openCamera
