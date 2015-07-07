@@ -1,0 +1,114 @@
+//
+//  HWsina-Prefix.pch
+//  HWsina
+//
+//  Created by qianfeng on 15/6/1.
+//  Copyright (c) 2015年 qianfeng. All rights reserved.
+//
+
+#ifndef HWsina_HWsina_Prefix_pch
+#define HWsina_HWsina_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "NSString+Extension.h"
+#import "NSDate+Extension.h"
+#import "NSString+Emoji.h"
+#import "UITextView+Extension.h"
+#import "UIWindow+Extension.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
+#define AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES
+
+#ifdef DEBUG //处于开发阶段
+#define HWLog(...) NSLog(__VA_ARGS__)
+#else //处于发布阶段
+#define HWLog(...)
+#endif
+
+//新浪微博授权信息
+
+#define HWClientId @"273733789"
+#define HWRedirectUrl @"http://baidu.com"
+#define HWClientSecret @"4b3d660ec31f1d85cd76da9b3f3fdb78"
+
+
+//RGB颜色
+#define HWColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0];
+//随机色
+#define HWRandomColor HWColor(arc4random_uniform(256),arc4random_uniform(256),arc4random_uniform(256));
+
+//通知中心
+#define HWNotificationCenter [NSNotificationCenter defaultCenter]
+
+// 导航栏高度
+#define HWNavigationHeight CGRectGetMaxY([self.navigationController navigationBar].frame)
+// 设置一个全局tableview的背景色
+#define HWGlobeTableViewBackgroundColor HWColor(239,239,239)
+//首页导航HWDropdownMenu距离顶部高度
+#define HWDropdownMenuMarginTop 10
+// 通知
+// 表情选中的通知
+#define HWEmotionDidSelectNotification  @"HWEmotionDidSelectNotification"
+#define HWSelectEmotionKey @"HWSelectEmotionKey"
+// 删除文字的通知
+#define HWEmotionDidDeleteNotification @"HWEmotionDidDeleteNotification"
+
+//字体
+// 昵称字体
+#define HWStatusCellNameFont [UIFont systemFontOfSize:15]
+// 时间字体
+#define HWStatusCellTimeFont [UIFont systemFontOfSize:12]
+//来源字体
+#define HWStatusCellSourceFont HWStatusCellTimeFont
+//正文字体
+#define HWStatusCellContentFont [UIFont systemFontOfSize:14]
+
+// 被转发微博的正文字体
+#define HWStatusCellRetweetContentFont [UIFont systemFontOfSize:13]
+
+// cell之间的间距
+#define HWStatusCellMargin 15
+// cell的边框宽度
+#define HWStatusCellBorderW 10
+// 设置转发微博dock的高度
+#define kRetweetedDockHeight 35
+
+// 6.cell内部子控件的颜色设置
+// 会员昵称颜色
+#define kMBScreenNameColor HWColor(243, 101, 18)
+// 非会员昵称颜色
+#define kScreenNameColor HWColor(93, 93, 93);
+// 被转发微博昵称颜色
+#define kRetweetedScreenNameColor HWColor(63, 104, 161)
+
+// 7.图片
+// 会员皇冠图标
+#define kMBIconW 14
+#define kMBIconH 14
+
+// 头像
+#define kIconSmallW 34
+#define kIconSmallH 34
+
+#define kIconDefaultW 50
+#define kIconDefaultH 50
+
+#define kIconBigW 85
+#define kIconBigH 85
+
+// 认证加V图标
+#define kVertifyW 18
+#define kVertifyH 18
+
+// 8.取出滚动条
+#pragma mark 重写这个方法的目的。去掉父类默认的操作：显示滚动条
+#define kHideScroll - (void)viewDidAppear:(BOOL)animated { }
+
+#endif
